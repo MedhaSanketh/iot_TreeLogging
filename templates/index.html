@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chainsaw Detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Upload Audio File</h1>
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="audio" accept=".wav,.mp3">
+        <input type="submit" value="Analyze">
+    </form>
+
+    {% if prediction %}
+        <h2>Prediction: {{ prediction }}</h2>
+        <audio controls>
+            <source src="{{ url_for('static', filename=audio_path) }}" type="audio/wav">
+        </audio>
+        <h3>Mel Spectrogram:</h3>
+        <img src="{{ url_for('static', filename=image_path) }}" alt="Spectrogram">
+    {% endif %}
+</body>
+</html>
